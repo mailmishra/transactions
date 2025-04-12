@@ -1,0 +1,45 @@
+
+server:
+  port: 8082
+spring:
+  application:
+    name: 'transactions'
+  datasource:
+    driverClassName: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/transactionsDb
+    username: user
+    password: password
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 5
+      idleTimeout: 30000
+      maxLifeTime: 200000
+      connectionTimeout: 3000
+      conectionTestQuery: select 1
+      connectionInitSql: select 1
+      poolName: Hikari
+      schema: transactions
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      
+      properties: 
+        hibernate: 
+          ddl-auto: none
+          generate-ddl: false
+
+  flyway:
+    #enabled: true
+    baseline-on-migrate: true
+    schemas: transactions
+    locations:
+      - classpath:db/migration
+
+hibernate:
+  show_sql: true
+
+logging:
+  level:
+    root: ERROR
+    com.projects.transaction: DEBUG
+    org.hibernate: DEBUG
