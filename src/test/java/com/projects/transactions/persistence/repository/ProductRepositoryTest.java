@@ -3,6 +3,7 @@ package com.projects.transactions.persistence.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_CLASS;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_CLASS;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +16,8 @@ import org.springframework.test.context.jdbc.Sql;
 import com.projects.transactions.persistence.entities.ProductCostReport;
 
 @SpringBootTest
-@Sql(scripts = {"/db/add_customer_transaction_records.sql"}, executionPhase = BEFORE_TEST_CLASS)
+@Sql(scripts = {"/db/cleanup_customer_transaction_records.sql"}, executionPhase = BEFORE_TEST_CLASS)
+@Sql(scripts = {"/db/add_customer_transaction_records.sql"}, executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = {"/db/cleanup_customer_transaction_records.sql"}, executionPhase = AFTER_TEST_CLASS)
 public class ProductRepositoryTest {
 

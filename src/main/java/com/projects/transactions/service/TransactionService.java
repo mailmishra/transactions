@@ -59,6 +59,9 @@ public class TransactionService {
      * Business validations
      */
     private void validateTransaction( TransactionMessage transactionMessage) throws RuntimeException {
+
+        //Aditional validation for CustomerId can be added.
+        
         Product product = this.getProductById(transactionMessage.getProductCode());
         if(product.getStatus().equals(Status.Inactive)) {
             throw new RuntimeException("Inactive Product in transaction=" + product.getProductCode());

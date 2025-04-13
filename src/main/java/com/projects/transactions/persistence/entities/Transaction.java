@@ -17,6 +17,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+ * Keeping Transactions DB without any foreign key as injestion performance is key.
+ * But if customer_Id & productId validation is needed OneToMany relationship can be added  with Lazy loading to this entity.
+ * Additionaly a foreign key on the table can be added, so as to ensure, invalid Product and Customer Id' can be rejected.
+ */
 @Entity
 @Data
 @NoArgsConstructor
