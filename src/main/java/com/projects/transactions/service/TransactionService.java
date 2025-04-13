@@ -33,7 +33,6 @@ public class TransactionService {
 
     private final TransactionsRepository transactionsRepository;
     private final ProductRepository productRepository;
-    private final ProducerService service;
 
     public void processTransaction(TransactionMessage payload) {
         try {
@@ -59,6 +58,9 @@ public class TransactionService {
      * Business validations
      */
     private void validateTransaction( TransactionMessage transactionMessage) throws RuntimeException {
+
+        //Aditional validation for CustomerId can be added.
+        
         Product product = this.getProductById(transactionMessage.getProductCode());
         if(product.getStatus().equals(Status.Inactive)) {
             throw new RuntimeException("Inactive Product in transaction=" + product.getProductCode());
@@ -81,10 +83,4 @@ public class TransactionService {
             throw new IllegalArgumentException(String.format("Invalid Product=%S in message", id));
         }
     }
-
-    // @PostConstruct
-    // public void postConstruct() {
-        
-        
-    // }
 }

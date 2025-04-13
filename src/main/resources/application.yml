@@ -57,3 +57,7 @@ kafka:
   topic:
     transaction: transactions
     consumer-type: json
+
+bootstrap:
+  kafka:
+    testing: true
