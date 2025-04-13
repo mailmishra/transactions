@@ -3,7 +3,7 @@ package com.projects.transactions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = TransactionsApplication.class)
 class TransactionsApplicationTests {
 
 	@Test
