@@ -33,7 +33,6 @@ public class TransactionService {
 
     private final TransactionsRepository transactionsRepository;
     private final ProductRepository productRepository;
-    private final ProducerService service;
 
     public void processTransaction(TransactionMessage payload) {
         try {
@@ -84,10 +83,4 @@ public class TransactionService {
             throw new IllegalArgumentException(String.format("Invalid Product=%S in message", id));
         }
     }
-
-    // @PostConstruct
-    // public void postConstruct() {
-        
-        
-    // }
 }

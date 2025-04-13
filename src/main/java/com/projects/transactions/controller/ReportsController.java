@@ -17,35 +17,35 @@ import com.projects.transactions.persistence.entities.TransactionByLocationRepor
 import com.projects.transactions.persistence.repository.CustomerRepository;
 import com.projects.transactions.persistence.repository.ProductRepository;
 import com.projects.transactions.persistence.repository.TransactionsRepository;
+import com.projects.transactions.service.ReportService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(path="reports")
 @RequiredArgsConstructor
-
+@Slf4j
 public class ReportsController {
 
-    private final CustomerRepository customerRepository;
+    private final ReportService reportService;
 
-    private final ProductRepository productRepository;
-
-    private final TransactionsRepository transactionsRepository;
-
-    @PreAuthorize("hasRole('ADMIN')")  
+    @PreAuthorize("hasRole('REPORTS')")  
     @GetMapping(path="/costPerCustomer", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CustomerCostReport>> getCustomerCostReport() {
-        return new ResponseEntity<>(customerRepository.findCostPerCustomer(), HttpStatus.OK);
+        return new ResponseEntity<>(reportService.getCostPerCustomer(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('REPORTS')") 
     @GetMapping(path="/costPerProduct", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProductCostReport>> getCostPerProductReport() {
-        return new ResponseEntity<>(productRepository.findCostPerProduct(), HttpStatus.OK);
+        return new ResponseEntity<>(reportService.getCostPerProduct(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')") 
     @GetMapping(path="/transactionsCount", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TransactionByLocationReport>>getTransactionsCountForAustraliaReport() {
-        return new ResponseEntity<>(transactionsRepository.findTransactionsCountByLocation("Australia"), HttpStatus.OK);
+        return new ResponseEntity<>(reportService.getTransactionByLocationReports(), HttpStatus.OK);
     }
 
 }

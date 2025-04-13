@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.projects.transactions.persistence.entities.CustomerCostReport;
@@ -24,7 +25,7 @@ public class CustomerRepositoryTest {
     CustomerRepository customerRepository;
 
     @Test
-    void testFindCostPerCustomer() {
+    void testFindCostPerCustomer_loadWithTransaction_success() {
        List<CustomerCostReport> report = customerRepository.findCostPerCustomer();
        assertEquals(3, report.size());
        assertEquals(BigDecimal.valueOf(9750), report.stream().filter( r -> r.getCustomerId() == 10001).findFirst().get().getCustomerCost());

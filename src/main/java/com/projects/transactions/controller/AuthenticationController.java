@@ -20,7 +20,6 @@ public class AuthenticationController {
 
     private final AuthenticationService authService;
 
-    // Build Login REST API
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody Login login){
 

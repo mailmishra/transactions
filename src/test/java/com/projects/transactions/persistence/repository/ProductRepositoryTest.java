@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.projects.transactions.persistence.entities.ProductCostReport;
@@ -19,13 +20,14 @@ import com.projects.transactions.persistence.entities.ProductCostReport;
 @Sql(scripts = {"/db/cleanup_customer_transaction_records.sql"}, executionPhase = BEFORE_TEST_CLASS)
 @Sql(scripts = {"/db/add_customer_transaction_records.sql"}, executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = {"/db/cleanup_customer_transaction_records.sql"}, executionPhase = AFTER_TEST_CLASS)
+
 public class ProductRepositoryTest {
 
     @Autowired
     ProductRepository productRepository;
     
     @Test
-    void testFindCostPerProduct() {
+    void testFindCostPerProduct_loadWithTransaction_success() {
        List<ProductCostReport> report = productRepository.findCostPerProduct();
        assertEquals(3, report.size());
        assertEquals(BigDecimal.valueOf(850), report.stream().filter( r -> r.getProductCode().equalsIgnoreCase("PRODUCT_001")).findFirst().get().getProductCost());
