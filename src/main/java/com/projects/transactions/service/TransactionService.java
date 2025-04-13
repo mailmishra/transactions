@@ -23,7 +23,6 @@ import com.projects.transactions.persistence.entities.Transaction;
 import com.projects.transactions.persistence.repository.ProductRepository;
 import com.projects.transactions.persistence.repository.TransactionsRepository;
 
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,19 +34,6 @@ public class TransactionService {
     private final TransactionsRepository transactionsRepository;
     private final ProductRepository productRepository;
     private final ProducerService service;
-
-    // @KafkaListener(topics = "${kafka.topic.transaction}", groupId = "${spring.kafka.consumer.group-id}")
-    // public void processTransaction(ConsumerRecord<String, TransactionMessage> cr,
-    // @Payload TransactionMessage payload) {
-    //     try {
-    //         log.info("Event Logged in transaction_events_topic - {}", payload);
-    //         this.validateTransaction(payload);
-    //         insertTransaction(payload);
-    //     } catch (Exception e) {
-    //         //Error processing - at this moment just logging and existing to deque the message.
-    //         log.error("Error processing message={}", payload, e);
-    //     }
-    // }
 
     public void processTransaction(TransactionMessage payload) {
         try {
@@ -96,12 +82,9 @@ public class TransactionService {
         }
     }
 
-    @PostConstruct
-    public void postConstruct() {
+    // @PostConstruct
+    // public void postConstruct() {
         
-        int increment = new Random().nextInt(100);
-        service.sendMessage(
-        TransactionMessage.builder().customerId(10000 + increment).transactionTime(LocalDateTime.of(LocalDate.now().minusDays(5) , LocalTime.now()))
-        .productCode("PRODUCT_001").quantity(500).build());
-    }
+        
+    // }
 }
