@@ -7,14 +7,15 @@ Transactions processor for Processing streaming transactions from Kafka. It also
 - Gradle Build:
     ``` ./gradlew build```
 - Change Configuration for bootRun . Toggle the property in application.yml ```bootstrap.kafka.testing=true```. This will publish Messages to the Kafka Topic
-    ```bootstrap.kafka.testing=true```
 - Start Application
     ``` ./gradlew bootRun ```
 
 ## usage Reports API
 ````
 ```
-    [Please ensure to boot run the application and define in applicatio.yml  ```bootstrap.kafka.testing=true```]. This will add entries to Transactions table necessary for Report API
+    Please ensure to boot run the application and define in application.yml 
+     ``` bootstrap.kafka.testing=true ```
+    This will add entries to Transactions table necessary for Report API
 ```
 ````
 
@@ -44,7 +45,7 @@ Transactions processor for Processing streaming transactions from Kafka. It also
         --header 'Cookie: JSESSIONID=150637DF3667C64458766187742E8F11'
     ```
 
-###s Admin User
+### Admin User
 - Login Admin User
     Use below curl command to Get access token
     ```

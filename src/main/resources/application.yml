@@ -60,4 +60,4 @@ kafka:
 
 bootstrap:
   kafka:
-    testing: true
+    testing: false
