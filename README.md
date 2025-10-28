@@ -64,3 +64,4 @@ Transactions processor for Processing streaming transactions from Kafka. It also
         --header 'Authorization: Bearer <Access_token>' \
         --header 'Cookie: JSESSIONID=150637DF3667C64458766187742E8F11'
     ```
+
